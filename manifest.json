@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "name": "SnowGrab",
+  "version": "1.0.0",
+  "description": "ServiceNow utilities — Cmd+Shift+I copies sys_id, Cmd+Shift+U copies the URL.",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.service-now.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "copy-sys-id": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+I"
+      },
+      "description": "Copy sys_id query parameter from the current URL"
+    },
+    "copy-url": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Copy the current tab URL"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "snowgrab@local",
+      "strict_min_version": "109.0"
+    }
+  }
+}
