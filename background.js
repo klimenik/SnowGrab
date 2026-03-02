@@ -76,7 +76,7 @@ function buildNavUrl(rawUrl) {
 }
 
 browser.commands.onCommand.addListener(async (command) => {
-  if (command !== "copy-sys-id" && command !== "copy-url") return;
+  if (!["copy-sys-id", "copy-url", "theme-dark", "theme-light"].includes(command)) return;
 
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   if (!tab?.url) return;
@@ -89,10 +89,15 @@ browser.commands.onCommand.addListener(async (command) => {
       type: "snutils:copy-sys-id",
       sysId: extractSysId(tab.url),
     });
-  } else {
+  } else if (command === "copy-url") {
     browser.tabs.sendMessage(tab.id, {
       type: "snutils:copy-url",
       url: buildNavUrl(tab.url) ?? tab.url,
+    });
+  } else {
+    browser.tabs.sendMessage(tab.id, {
+      type: "snutils:set-theme",
+      dark: command === "theme-dark",
     });
   }
 });

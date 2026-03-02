@@ -22,17 +22,31 @@
   "commands": {
     "copy-sys-id": {
       "suggested_key": {
-        "default": "Ctrl+Shift+S",
-        "mac": "Command+Shift+I"
+        "default": "Ctrl+Shift+Right",
+        "mac": "Command+Shift+Right"
       },
       "description": "Copy sys_id query parameter from the current URL"
     },
     "copy-url": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U"
+        "default": "Ctrl+Shift+Left",
+        "mac": "Command+Shift+Left"
       },
       "description": "Copy the current tab URL"
+    },
+    "theme-dark": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up",
+        "mac": "Command+Shift+Up"
+      },
+      "description": "Switch to dark theme"
+    },
+    "theme-light": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down",
+        "mac": "Command+Shift+Down"
+      },
+      "description": "Switch to light theme"
     }
   },
   "icons": {

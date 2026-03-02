@@ -76,6 +76,48 @@ function copyText(text, successMsg) {
     .catch(() => showToast("Failed to copy to clipboard", "error"));
 }
 
+// ── Theme ─────────────────────────────────────────────────────────────────────
+
+// OOB sys_ids — consistent across all ServiceNow instances (base platform records).
+const POLARIS_THEME = "31bf91ae07203010e03948f78ad30095";
+const DARK_VARIANT  = "e09ef7ae07103010e03948f78ad3002c";
+
+const THEME_MUTATION = "mutation snCanvasAppshellRoot($name:String!$value:String!)" +
+  "{now{userPreference{updateUserPreference(name:$name value:$value){name value}}}}";
+
+async function setTheme(dark) {
+  const variant = dark ? DARK_VARIANT : "";
+  const label   = dark ? "Dark" : "Light";
+
+  async function gql(name, value) {
+    const res = await fetch(`${location.origin}/api/now/graphql`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        operationName: "snCanvasAppshellRoot",
+        query: THEME_MUTATION,
+        variables: { name, value },
+      }),
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      console.error("[SnowGrab] GraphQL error body:", body);
+      throw new Error(`HTTP ${res.status}: ${body.slice(0, 120)}`);
+    }
+  }
+
+  try {
+    await gql("glide.ui.polaris.theme", POLARIS_THEME);
+    await gql("glide.ui.polaris.theme.variant", variant);
+
+    showToast(`Switched to ${label} mode — reloading…`, "success");
+    setTimeout(() => location.reload(), 900);
+  } catch (err) {
+    console.error("[SnowGrab] Theme change failed:", err);
+    showToast(`Theme change failed: ${err.message}`, "error");
+  }
+}
+
 // ── Message handler ──────────────────────────────────────────────────────────
 
 browser.runtime.onMessage.addListener((message) => {
@@ -88,5 +130,7 @@ browser.runtime.onMessage.addListener((message) => {
     copyText(sysId, `Copied sys_id: ${sysId}`);
   } else if (message.type === "snutils:copy-url") {
     copyText(message.url, "URL copied");
+  } else if (message.type === "snutils:set-theme") {
+    setTheme(message.dark);
   }
 });

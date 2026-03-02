@@ -8,10 +8,12 @@ A Firefox extension for ServiceNow power users. Grab the `sys_id` or a clean rec
 
 | Shortcut | Action |
 |---|---|
-| `Cmd+Shift+I` (Mac) / `Ctrl+Shift+S` (Win/Linux) | Copy `sys_id` from the current URL |
-| `Cmd+Shift+U` (Mac) / `Ctrl+Shift+U` (Win/Linux) | Copy a clean `nav_to.do` record URL |
+| `Cmd+Shift+Right` (Mac) / `Ctrl+Shift+Right` (Win/Linux) | Copy `sys_id` from the current URL |
+| `Cmd+Shift+Left` (Mac) / `Ctrl+Shift+Left` (Win/Linux) | Copy a clean `nav_to.do` record URL |
+| `Cmd+Shift+Up` (Mac) / `Ctrl+Shift+Up` (Win/Linux) | Switch to dark theme |
+| `Cmd+Shift+Down` (Mac) / `Ctrl+Shift+Down` (Win/Linux) | Switch to light theme |
 
-Both shortcuts only activate on `*.service-now.com` pages and are **fully remappable** via Firefox's built-in shortcut manager (`about:addons` → gear icon → Manage Extension Shortcuts).
+All shortcuts only activate on `*.service-now.com` pages and are **fully remappable** via Firefox's built-in shortcut manager (`about:addons` → gear icon → Manage Extension Shortcuts).
 
 ### URL normalisation
 
@@ -33,7 +35,11 @@ A small toast notification confirms what was copied.
 
 ## Installation
 
-SnowGrab is not (yet) listed on addons.mozilla.org. Load it as a temporary or permanent unsigned extension:
+SnowGrab is distributed as a self-signed `.xpi` via AMO (unlisted). To install:
+
+1. Download the latest `.xpi` from the [releases page](../../releases)
+2. Open `about:addons` in Firefox → gear icon → **Install Add-on From File…**
+3. Select the `.xpi`
 
 ### Temporary (development / testing)
 
@@ -41,12 +47,6 @@ SnowGrab is not (yet) listed on addons.mozilla.org. Load it as a temporary or pe
 2. Click **This Firefox** → **Load Temporary Add-on…**
 3. Select the `manifest.json` file from this repo
 4. The extension is active until Firefox is restarted
-
-### Permanent (unsigned, requires config change)
-
-1. Open `about:config` and set `xpinstall.signatures.required` to `false`
-2. Open `about:addons` → gear icon → **Install Add-on From File…**
-3. Select the `manifest.json` (or zip the repo contents and select the `.zip`)
 
 ---
 
