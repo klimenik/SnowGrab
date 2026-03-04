@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "SnowGrab",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ServiceNow utilities — Cmd+Shift+I copies sys_id, Cmd+Shift+U copies the URL.",
   "permissions": [
     "activeTab",
@@ -36,15 +36,15 @@
     },
     "theme-dark": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Up",
-        "mac": "Command+Shift+Up"
+        "default": "Ctrl+Shift+Down",
+        "mac": "Command+Shift+Down"
       },
       "description": "Switch to dark theme"
     },
     "theme-light": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Down",
-        "mac": "Command+Shift+Down"
+        "default": "Ctrl+Shift+Up",
+        "mac": "Command+Shift+Up"
       },
       "description": "Switch to light theme"
     }
